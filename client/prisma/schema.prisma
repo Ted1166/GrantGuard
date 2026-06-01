@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+
+model Grant {
+  id String @id
+  title String
+  committee String
+  totalBudget String
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  milestones Milestone[]
+}
+
+model Milestone {
+  id String @id
+  grantId String
+  grant Grant @relation(fields: [grantId], references: [id])
+  builder String
+  amount String
+  evidenceCid String?
+  reviewNotes String?
+  status Int @default(1)
+  txHash String?
+  submittedAt DateTime?
+  reviewedAt DateTime?
+  paidAt DateTime?
+  agentTasks AgentTask[]
+}
+
+model AgentTask {
+  id String @id @default(cuid())
+  type String                       // 'review' | 'distribute' | 'audit'
+  milestoneId String
+  milestone Milestone @relation(fields: [milestoneId], references: [id])
+  status String @default("queued") // 'queued'|'running'|'done'|'failed'
+  result String?                      // JSON stringified result
+  error String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DelegationRecord {
+  id String @id @default(cuid())
+  delegator String
+  delegate String
+  delegationHash String @unique
+  signedData String
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+}

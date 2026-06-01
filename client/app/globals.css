@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a0f;
+  --bg-card: #111118;
+  --bg-hover: #16161f;
+  --border: #2a2a3a;
+  --border-hi: #3d3d55;
+  --text: #e8e6e0;
+  --text-muted:#8a8898;
+  --accent: #6ee7b7;
+  --accent2: #818cf8;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --font-head: 'Syne', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-head);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
+
+::selection { background: var(--accent2); color: #fff; }
+
+.mono { font-family: var(--font-mono); }
+
+@keyframes borderSpin {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.agent-border {
+  background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+    linear-gradient(135deg, var(--accent2), var(--accent), var(--accent2)) border-box;
+  border: 1px solid transparent;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.status-pulse { animation: pulse-dot 1.5s ease-in-out infinite; }

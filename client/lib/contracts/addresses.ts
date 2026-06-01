@@ -1,0 +1,1 @@
+export { CONTRACTS, USDC_ADDRESS, DELEGATION_MANAGER, ACTIVE_CHAIN_ID } from '@/config/constants'

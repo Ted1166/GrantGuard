@@ -6,6 +6,10 @@ import Link from 'next/link'
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 import { formatUnits } from 'viem'
 import { ConnectButton } from '@/components/wallet/ConnectButton'
+import { ReviewReport } from '@/components/agents/ReviewReport'
+import { TransactionStatus } from '@/components/agents/TransactionStatus'
+import type { ReviewResult, DistributionResult } from '@/types/agent'
+import { MilestoneSubmitForm } from '@/components/grants/MilestoneSubmitForm'
 import { AgentStatusPanel } from '@/components/agents/AgentStatusPanel'
 import { DelegationChain } from '@/components/agents/DelegationChain'
 import { PermissionRequest } from '@/components/wallet/PermissionRequest'
@@ -18,11 +22,11 @@ interface GrantDetail extends GrantRecord {
 }
 
 const STATUS_CONFIG: Record<number, { label: string; color: string; bg: string }> = {
-  [MilestoneStatus.PENDING]: { label: 'Pending', color: '#fbbf24', bg: 'rgba(251,191,36,0.08)' },
+  [MilestoneStatus.PENDING]:      { label: 'Pending',      color: '#fbbf24', bg: 'rgba(251,191,36,0.08)' },
   [MilestoneStatus.UNDER_REVIEW]: { label: 'Under Review', color: '#818cf8', bg: 'rgba(129,140,248,0.08)' },
-  [MilestoneStatus.APPROVED]: { label: 'Approved', color: '#6ee7b7', bg: 'rgba(110,231,183,0.08)' },
-  [MilestoneStatus.PAID]: { label: 'Paid ✓', color: '#6ee7b7', bg: 'rgba(110,231,183,0.08)' },
-  [MilestoneStatus.REJECTED]: { label: 'Rejected', color: '#f87171', bg: 'rgba(248,113,113,0.08)' },
+  [MilestoneStatus.APPROVED]:     { label: 'Approved',     color: '#6ee7b7', bg: 'rgba(110,231,183,0.08)' },
+  [MilestoneStatus.PAID]:         { label: 'Paid ✓',       color: '#6ee7b7', bg: 'rgba(110,231,183,0.08)' },
+  [MilestoneStatus.REJECTED]:     { label: 'Rejected',     color: '#f87171', bg: 'rgba(248,113,113,0.08)' },
 }
 
 function formatUsdc(amount: string) {
@@ -39,6 +43,8 @@ export default function GrantDetailPage() {
   const [statusMsg, setStatusMsg] = useState('')
   const [permissionsCtx, setPermissionsCtx] = useState<unknown>(null)
   const [showChain, setShowChain] = useState(false)
+  const [reviewResult, setReviewResult] = useState<ReviewResult | null>(null)
+  const [distResult, setDistResult] = useState<DistributionResult | null>(null)
 
   useEffect(() => {
     fetch(`/api/grants/${grantId}`)
@@ -67,6 +73,7 @@ export default function GrantDetailPage() {
       })
       const data = await res.json()
       setStatusMsg(data.result?.summary ?? 'Review complete.')
+      if (data.result) setReviewResult(data.result)
       await refreshGrant(milestoneId)
     } catch {
       setStatusMsg('Review failed — check console.')
@@ -88,6 +95,7 @@ export default function GrantDetailPage() {
       if (data.error) {
         setStatusMsg(`Distribution failed: ${data.error}`)
       } else {
+        if (data.result) setDistResult(data.result)
         setStatusMsg(
           data.result?.status === 'confirmed'
             ? `✓ Paid! Tx: ${data.result.txHash?.slice(0, 12)}…`
@@ -279,6 +287,21 @@ export default function GrantDetailPage() {
                 </Link>
               )}
             </div>
+
+            {/* Venice review report */}
+            {reviewResult && (
+              <ReviewReport result={reviewResult} />
+            )}
+
+            {/* 1Shot transaction status */}
+            {distResult && distResult.oneshotTaskId && (
+              <TransactionStatus
+                taskId={distResult.oneshotTaskId}
+                txHash={distResult.txHash || undefined}
+                initialStatus={distResult.status}
+                onConfirmed={(hash) => refreshGrant(selected.id)}
+              />
+            )}
 
             {/* Agent pipeline */}
             <AgentStatusPanel

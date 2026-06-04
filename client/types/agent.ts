@@ -5,6 +5,7 @@ export interface ReviewInput {
   amount: bigint
   evidenceCid: string
   githubRepo?: string
+  milestoneDescription?: string
 }
 
 export interface ReviewResult {

@@ -1,0 +1,52 @@
+<svg width="100%" viewBox="0 0 680 680" role="img" style="" xmlns="http://www.w3.org/2000/svg">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">GrantGuard logo</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Abstract shield with interlocking G letterform and circuit nodes, in indigo and emerald</desc>
+  <defs>
+    <clipPath id="shieldClip">
+      <path d="M340 60 L520 140 L520 380 Q520 500 340 600 Q160 500 160 380 L160 140 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Shield body -->
+  <path d="M340 60 L520 140 L520 380 Q520 500 340 600 Q160 500 160 380 L160 140 Z" fill="#1a1a2e" stroke="#4f46e5" stroke-width="4" style="fill:rgb(26, 26, 46);stroke:rgb(79, 70, 229);color:rgb(255, 255, 255);stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Inner shield layer -->
+  <path d="M340 100 L490 168 L490 375 Q490 472 340 558 Q190 472 190 375 L190 168 Z" fill="none" stroke="#6366f1" stroke-width="1.5" opacity="0.4" style="fill:none;stroke:rgb(99, 102, 241);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Circuit grid lines (horizontal) clipped to shield -->
+  <g clip-path="url(#shieldClip)" opacity="0.15" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.15;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+    <line x1="160" y1="220" x2="520" y2="220" stroke="#6ee7b7" stroke-width="1" style="fill:rgb(0, 0, 0);stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <line x1="160" y1="300" x2="520" y2="300" stroke="#6ee7b7" stroke-width="1" style="fill:rgb(0, 0, 0);stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <line x1="160" y1="380" x2="520" y2="380" stroke="#6ee7b7" stroke-width="1" style="fill:rgb(0, 0, 0);stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <line x1="160" y1="460" x2="520" y2="460" stroke="#6ee7b7" stroke-width="1" style="fill:rgb(0, 0, 0);stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <line x1="240" y1="60" x2="240" y2="600" stroke="#6ee7b7" stroke-width="1" style="fill:rgb(0, 0, 0);stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <line x1="340" y1="60" x2="340" y2="600" stroke="#6ee7b7" stroke-width="1" style="fill:rgb(0, 0, 0);stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <line x1="440" y1="60" x2="440" y2="600" stroke="#6ee7b7" stroke-width="1" style="fill:rgb(0, 0, 0);stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  </g>
+
+  <!-- Circuit nodes clipped to shield -->
+  <g clip-path="url(#shieldClip)" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+    <circle cx="240" cy="220" r="4" fill="#6ee7b7" opacity="0.5" style="fill:rgb(110, 231, 183);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <circle cx="440" cy="220" r="4" fill="#6ee7b7" opacity="0.5" style="fill:rgb(110, 231, 183);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <circle cx="240" cy="380" r="4" fill="#6366f1" opacity="0.6" style="fill:rgb(99, 102, 241);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.6;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <circle cx="440" cy="380" r="4" fill="#6366f1" opacity="0.6" style="fill:rgb(99, 102, 241);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.6;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <circle cx="340" cy="300" r="5" fill="#6ee7b7" opacity="0.3" style="fill:rgb(110, 231, 183);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.3;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  </g>
+
+  <!-- G letterform — bold geometric -->
+  <!-- Outer arc of G -->
+  <path d="M390 210 A80 80 0 1 0 420 330 L340 330 L340 290 L390 290" fill="none" stroke="#6ee7b7" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:18px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Accent dot — top right of shield -->
+  <circle cx="480" cy="170" r="8" fill="#6ee7b7" opacity="0.9" style="fill:rgb(110, 231, 183);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.9;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="480" cy="170" r="14" fill="none" stroke="#6ee7b7" stroke-width="1.5" opacity="0.4" style="fill:none;stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Accent dot — bottom left -->
+  <circle cx="220" cy="420" r="5" fill="#6366f1" opacity="0.8" style="fill:rgb(99, 102, 241);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.8;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Shield border glow line -->
+  <path d="M340 60 L520 140 L520 380 Q520 500 340 600 Q160 500 160 380 L160 140 Z" fill="none" stroke="#6ee7b7" stroke-width="1" opacity="0.3" style="fill:none;stroke:rgb(110, 231, 183);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.3;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Bottom point accent -->
+  <circle cx="340" cy="598" r="6" fill="#6ee7b7" opacity="0.7" style="fill:rgb(110, 231, 183);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+</svg>

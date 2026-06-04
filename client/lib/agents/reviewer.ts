@@ -6,7 +6,7 @@ import { USDC_DECIMALS } from '@/config/constants'
 import type { ReviewInput, ReviewResult } from '@/types/agent'
 
 export async function runReviewerAgent(input: ReviewInput): Promise<ReviewResult> {
-  let githubSummary = 'No GitHub repository provided.'
+  let githubSummary = 'No GitHub repository provided — evidence limited to IPFS CID only.'
   let githubData: ReviewResult['githubData'] = undefined
 
   if (input.githubRepo) {
@@ -18,9 +18,19 @@ export async function runReviewerAgent(input: ReviewInput): Promise<ReviewResult
         prsmerged: ghData.mergedPRs,
         lastActivity: ghData.lastCommitDate ?? 'unknown',
       }
+
+      if (ghData.commits === 0) {
+        githubSummary += '\n⚠️ FRAUD SIGNAL: Zero commits found in the last 30 days.'
+      }
+
+      if (!ghData.hasTests) {
+        githubSummary += '\n⚠️ NOTE: No test files detected in recent commits.'
+      }
     } catch (err) {
-      githubSummary = `GitHub fetch failed: ${err instanceof Error ? err.message : 'unknown error'}`
+      githubSummary = `GitHub fetch failed: ${err instanceof Error ? err.message : 'unknown error'}. Cannot verify repository activity — treat as unverified submission.`
     }
+  } else {
+    githubSummary += '\n⚠️ NOTE: No GitHub repo provided. Cannot verify development activity.'
   }
 
   const amountUsdc = formatUnits(input.amount, USDC_DECIMALS)
@@ -29,9 +39,9 @@ export async function runReviewerAgent(input: ReviewInput): Promise<ReviewResult
     milestoneId: input.milestoneId,
     builder: input.builder,
     amountUsdc,
-    evidenceCid: input.evidenceCid,
+    evidenceCid: input.evidenceCid || 'NOT PROVIDED — automatic rejection candidate',
     githubSummary,
-    milestoneName: input.milestoneId.slice(0, 10) + '...',
+    milestoneDescription: input.milestoneDescription || 'No description provided by committee.',
   })
 
   const rawResponse = await veniceChat(
@@ -45,7 +55,8 @@ export async function runReviewerAgent(input: ReviewInput): Promise<ReviewResult
     score: number
     reasoning: string
     summary: string
-    flags?: string[]
+    fraudFlags?: string[]
+    milestoneAligned?: boolean
   }
 
   try {
@@ -55,9 +66,17 @@ export async function runReviewerAgent(input: ReviewInput): Promise<ReviewResult
     parsed = {
       approved: false,
       score: 0,
-      reasoning: `Failed to parse Venice response: ${rawResponse.slice(0, 200)}`,
-      summary: 'Review failed — could not parse AI response.',
+      reasoning: `Venice response parse error: ${rawResponse.slice(0, 200)}`,
+      summary: 'Review failed — AI response could not be parsed. Manual review required.',
+      fraudFlags: ['parse_error'],
     }
+  }
+
+  if (!input.evidenceCid) {
+    parsed.approved = false
+    parsed.score = 0
+    parsed.fraudFlags = [...(parsed.fraudFlags ?? []), 'no_evidence_cid']
+    parsed.summary = 'Rejected: No evidence submitted. Builder must provide an IPFS CID.'
   }
 
   return {

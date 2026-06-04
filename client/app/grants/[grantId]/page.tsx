@@ -22,11 +22,11 @@ interface GrantDetail extends GrantRecord {
 }
 
 const STATUS_CONFIG: Record<number, { label: string; color: string; bg: string }> = {
-  [MilestoneStatus.PENDING]:      { label: 'Pending',      color: '#fbbf24', bg: 'rgba(251,191,36,0.08)' },
+  [MilestoneStatus.PENDING]: { label: 'Pending', color: '#fbbf24', bg: 'rgba(251,191,36,0.08)' },
   [MilestoneStatus.UNDER_REVIEW]: { label: 'Under Review', color: '#818cf8', bg: 'rgba(129,140,248,0.08)' },
-  [MilestoneStatus.APPROVED]:     { label: 'Approved',     color: '#6ee7b7', bg: 'rgba(110,231,183,0.08)' },
-  [MilestoneStatus.PAID]:         { label: 'Paid ✓',       color: '#6ee7b7', bg: 'rgba(110,231,183,0.08)' },
-  [MilestoneStatus.REJECTED]:     { label: 'Rejected',     color: '#f87171', bg: 'rgba(248,113,113,0.08)' },
+  [MilestoneStatus.APPROVED]: { label: 'Approved', color: '#6ee7b7', bg: 'rgba(110,231,183,0.08)' },
+  [MilestoneStatus.PAID]: { label: 'Paid ✓', color: '#6ee7b7', bg: 'rgba(110,231,183,0.08)' },
+  [MilestoneStatus.REJECTED]: { label: 'Rejected', color: '#f87171', bg: 'rgba(248,113,113,0.08)' },
 }
 
 function formatUsdc(amount: string) {
@@ -122,7 +122,7 @@ export default function GrantDetailPage() {
     <main className="min-h-dvh flex flex-col">
       <nav className="flex items-center justify-between px-8 py-5 border-b border-[var(--border)]">
         <div className="flex items-center gap-3 text-sm">
-          <Link href="/" className="font-bold tracking-tight">GrantGuard</Link>
+          <Link href="/" className="flex items-center gap-2 font-bold tracking-tight"><svg width="22" height="26" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 4 L92 24 L92 72 Q92 100 50 116 Q8 100 8 72 L8 24 Z" fill="#1a1a2e" stroke="#6366f1" strokeWidth="3"/><path d="M62 35 A22 22 0 1 0 70 68 L50 68 L50 56 L62 56" stroke="#6ee7b7" strokeWidth="7" strokeLinecap="round" fill="none"/><circle cx="82" cy="32" r="4" fill="#6ee7b7" opacity="0.9"/></svg>GrantGuard</Link>
           <span className="text-[var(--border-hi)]">/</span>
           <Link href="/dashboard" className="text-[var(--text-muted)] hover:text-[var(--text)]">Dashboard</Link>
           <span className="text-[var(--border-hi)]">/</span>
@@ -189,6 +189,13 @@ export default function GrantDetailPage() {
               )
             })}
           </div>
+
+          {/* Committee: Add milestone form - always visible to committee */}
+          {isCommittee && (
+            <div className="mt-4">
+              <MilestoneSubmitForm grantId={grantId} onAdded={() => refreshGrant()} />
+            </div>
+          )}
         </div>
 
         {/* Right — detail panel */}

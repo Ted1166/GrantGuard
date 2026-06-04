@@ -7,9 +7,11 @@ export default function HomePage() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-8 py-5 border-b border-[var(--border)]">
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded-md bg-gradient-to-br from-[var(--accent2)] to-[var(--accent)] flex items-center justify-center">
-            <span className="text-xs font-bold text-[#0a0a0f]">G</span>
-          </div>
+          <svg width="28" height="28" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 4 L92 24 L92 72 Q92 100 50 116 Q8 100 8 72 L8 24 Z" fill="#1a1a2e" stroke="#6366f1" strokeWidth="3"/>
+                <path d="M62 35 A22 22 0 1 0 70 68 L50 68 L50 56 L62 56" stroke="#6ee7b7" strokeWidth="7" strokeLinecap="round" fill="none"/>
+                <circle cx="82" cy="32" r="4" fill="#6ee7b7" opacity="0.9"/>
+              </svg>
           <span className="font-bold tracking-tight">GrantGuard</span>
         </div>
         <ConnectButton />

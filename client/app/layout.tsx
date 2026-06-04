@@ -3,7 +3,8 @@ import { Providers } from './providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'GrantGuard — Privacy-First AI Grant Manager',
+  title: 'GrantGuard',
+  icons: { icon: '/logo.svg' },
   description:
     'Autonomous milestone-based grant payments powered by Venice AI, MetaMask Smart Accounts, and 1Shot.',
 }

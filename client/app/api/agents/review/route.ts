@@ -25,11 +25,7 @@ export async function POST(req: NextRequest) {
     }
 
     const task = await prisma.agentTask.create({
-      data: {
-        type: 'review',
-        milestoneId,
-        status: 'running',
-      },
+      data: { type: 'review', milestoneId, status: 'running' },
     })
 
     const input: ReviewInput = {
@@ -39,16 +35,14 @@ export async function POST(req: NextRequest) {
       amount: BigInt(milestone.amount),
       evidenceCid: milestone.evidenceCid,
       githubRepo,
+      milestoneDescription: (milestone as any).description ?? undefined,
     }
 
     const result = await runReviewerAgent(input)
 
     await prisma.agentTask.update({
       where: { id: task.id },
-      data: {
-        status: 'done',
-        result: JSON.stringify(result),
-      },
+      data: { status: 'done', result: JSON.stringify(result) },
     })
 
     await prisma.milestone.update({

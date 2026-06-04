@@ -54,7 +54,7 @@ export default function SubmitEvidencePage() {
     <main className="min-h-dvh flex flex-col">
       <nav className="flex items-center justify-between px-8 py-5 border-b border-[var(--border)]">
         <div className="flex items-center gap-3 text-sm">
-          <Link href="/" className="font-bold tracking-tight">GrantGuard</Link>
+          <Link href="/" className="flex items-center gap-2 font-bold tracking-tight"><svg width="22" height="26" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 4 L92 24 L92 72 Q92 100 50 116 Q8 100 8 72 L8 24 Z" fill="#1a1a2e" stroke="#6366f1" strokeWidth="3"/><path d="M62 35 A22 22 0 1 0 70 68 L50 68 L50 56 L62 56" stroke="#6ee7b7" strokeWidth="7" strokeLinecap="round" fill="none"/><circle cx="82" cy="32" r="4" fill="#6ee7b7" opacity="0.9"/></svg>GrantGuard</Link>
           <span className="text-[var(--border-hi)]">/</span>
           <Link href={`/grants/${grantId}`} className="text-[var(--text-muted)] hover:text-[var(--text)]">
             Grant

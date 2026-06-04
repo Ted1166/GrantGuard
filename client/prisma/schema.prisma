@@ -23,6 +23,7 @@ model Milestone {
   grant Grant @relation(fields: [grantId], references: [id])
   builder String
   amount String
+  description String?
   evidenceCid String?
   reviewNotes String?
   status Int @default(1)

@@ -1,5 +1,4 @@
 'use client'
-
 import { createConfig, http } from 'wagmi'
 import { injected } from 'wagmi/connectors'
 import { baseSepolia, baseMainnet } from './chains'

@@ -10,7 +10,9 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@libsql/client": "^0.17.3",
     "@metamask/smart-accounts-kit": "^1.6.0",
+    "@prisma/adapter-libsql": "^7.8.0",
     "@prisma/client": "^5.22.0",
     "@privy-io/react-auth": "^3.28.0",
     "@tanstack/react-query": "^5.100.14",
@@ -22,8 +24,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.6.0",
-    "viem": "^2.51.2",
-    "wagmi": "^3.6.16"
+    "viem": "^2.51.0",
+    "wagmi": "^2.15.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

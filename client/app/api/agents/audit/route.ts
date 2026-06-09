@@ -20,13 +20,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Milestone not found' }, { status: 404 })
     }
 
-    // Get review result
     const reviewTask = await prisma.agentTask.findFirst({
       where: { milestoneId, type: 'review', status: 'done' },
       orderBy: { createdAt: 'desc' },
     })
 
-    // Get distribution result
     const distributeTask = await prisma.agentTask.findFirst({
       where: { milestoneId, type: 'distribute', status: 'done' },
       orderBy: { createdAt: 'desc' },

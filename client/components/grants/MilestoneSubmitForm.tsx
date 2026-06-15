@@ -36,7 +36,6 @@ export function MilestoneSubmitForm({ grantId, onAdded }: Props) {
     try {
       const amountWei = parseUnits(amount, USDC_DECIMALS)
 
-      // 1. Save to DB with description (AI uses this to verify submissions)
       const res = await fetch(`/api/grants/${grantId}/milestones`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -46,7 +45,6 @@ export function MilestoneSubmitForm({ grantId, onAdded }: Props) {
       if (!res.ok) throw new Error('Failed to create milestone')
       const milestone = await res.json()
 
-      // 2. Register on-chain - only this builder wallet can submit evidence
       writeContract({
         address: CONTRACTS.MILESTONE_REGISTRY,
         abi: MILESTONE_REGISTRY_ABI,

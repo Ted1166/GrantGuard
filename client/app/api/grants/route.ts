@@ -14,7 +14,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { title, committee, totalBudget } = body
+    const { id, title, committee, totalBudget } = body
 
     if (!title || !committee || !totalBudget) {
       return NextResponse.json(
@@ -23,20 +23,25 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const grantId = keccak256(
+    const grantId = (id as `0x${string}`) ?? keccak256(
       encodePacked(
-        ['string', 'address', 'uint256'],
-        [title, committee as `0x${string}`, BigInt(Date.now())]
+        ['string', 'address'],
+        [title, committee as `0x${string}`]
       )
     )
 
-    const grant = await prisma.grant.create({
-      data: {
+    const grant = await prisma.grant.upsert({
+      where: { id: grantId },
+      update: { title, totalBudget: totalBudget.toString() },
+      create: {
         id: grantId,
         title,
         committee,
         totalBudget: totalBudget.toString(),
         active: true,
+        status: 'draft',
+        termsAgreed: Boolean(body.termsSignature),
+        TermsSignedAt: body.termsSignature ? new Date() : null,
       },
     })
 

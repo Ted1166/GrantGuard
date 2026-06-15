@@ -36,6 +36,7 @@ export interface GrantRecord {
   committee: string
   totalBudget: string
   active: boolean
+  status?: string
   createdAt: string
 }
 

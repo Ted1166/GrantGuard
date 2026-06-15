@@ -1,19 +1,23 @@
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url = env("DATABASE_URL")
 }
 
 model Grant {
   id String @id
   title String
+  startDate DateTime?
+  endDate DateTime?
+  TermsSignedAt DateTime?
+  termsAgreed  Boolean  @default(false)
   committee String
   totalBudget String
   active Boolean @default(true)
+  status String @default("draft")
   createdAt DateTime @default(now())
   milestones Milestone[]
 }
@@ -37,11 +41,11 @@ model Milestone {
 
 model AgentTask {
   id String @id @default(cuid())
-  type String                       // 'review' | 'distribute' | 'audit'
+  type String
   milestoneId String
   milestone Milestone @relation(fields: [milestoneId], references: [id])
-  status String @default("queued") // 'queued'|'running'|'done'|'failed'
-  result String?                      // JSON stringified result
+  status String @default("queued")
+  result String?
   error String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

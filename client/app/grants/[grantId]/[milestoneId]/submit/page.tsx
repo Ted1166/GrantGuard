@@ -16,6 +16,7 @@ export default function SubmitEvidencePage() {
   const [githubRepo, setGithubRepo] = useState('')
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [redirected, setRedirected] = useState(false)
 
   const { writeContract, data: txHash } = useWriteContract()
   const { isLoading: txPending, isSuccess: txSuccess } =
@@ -40,13 +41,21 @@ export default function SubmitEvidencePage() {
         functionName: 'submitEvidence',
         args: [milestoneId as `0x${string}`, cid],
       })
+
+      // Update DB with evidence CID
+      await fetch(`/api/grants/${grantId}/milestones/${milestoneId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ evidenceCid: cid, submittedAt: new Date().toISOString() }),
+      })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Submission failed')
       setSaving(false)
     }
   }
 
-  if (txSuccess) {
+  if (txSuccess && !redirected) {
+    setRedirected(true)
     setTimeout(() => router.push(`/grants/${grantId}`), 1500)
   }
 

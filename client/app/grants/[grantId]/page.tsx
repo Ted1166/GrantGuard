@@ -10,6 +10,7 @@ import { ReviewReport } from '@/components/agents/ReviewReport'
 import { TransactionStatus } from '@/components/agents/TransactionStatus'
 import type { ReviewResult, DistributionResult } from '@/types/agent'
 import { MilestoneSubmitForm } from '@/components/grants/MilestoneSubmitForm'
+import { GrantStatusEditor } from '@/components/grants/GrantStatusEditor'
 import { AgentStatusPanel } from '@/components/agents/AgentStatusPanel'
 import { DelegationChain } from '@/components/agents/DelegationChain'
 import { PermissionRequest } from '@/components/wallet/PermissionRequest'
@@ -43,6 +44,7 @@ export default function GrantDetailPage() {
   const [statusMsg, setStatusMsg] = useState('')
   const [permissionsCtx, setPermissionsCtx] = useState<unknown>(null)
   const [showChain, setShowChain] = useState(false)
+  const [grantStatus, setGrantStatus] = useState(grant?.status ?? 'draft')
   const [reviewResult, setReviewResult] = useState<ReviewResult | null>(null)
   const [distResult, setDistResult] = useState<DistributionResult | null>(null)
 
@@ -137,7 +139,16 @@ export default function GrantDetailPage() {
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-xl font-bold">{grant.title}</h1>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h1 className="text-xl font-bold">{grant.title}</h1>
+                {isCommittee && (
+                  <GrantStatusEditor
+                    grantId={grantId}
+                    currentStatus={grantStatus}
+                    onChange={setGrantStatus}
+                  />
+                )}
+              </div>
               <p className="text-xs mono text-[var(--text-muted)] mt-1">
                 {grant.committee.slice(0, 10)}…{grant.committee.slice(-6)}
               </p>
@@ -190,7 +201,7 @@ export default function GrantDetailPage() {
             })}
           </div>
 
-          {/* Committee: Add milestone form - always visible to committee */}
+          {/* Committee: Add milestone form — always visible to committee */}
           {isCommittee && (
             <div className="mt-4">
               <MilestoneSubmitForm grantId={grantId} onAdded={() => refreshGrant()} />

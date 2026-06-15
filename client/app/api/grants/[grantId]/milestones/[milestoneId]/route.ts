@@ -1,64 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
-import { keccak256, encodePacked } from 'viem'
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: Promise<{ grantId: string }> }
+  { params }: { params: Promise<{ milestoneId: string }> }
 ) {
-  const { grantId } = await params
-  const milestones = await prisma.milestone.findMany({
-    where: { grantId },
-    orderBy: { amount: 'desc' },
-    include: { agentTasks: { orderBy: { createdAt: 'desc' }, take: 3 } },
-  })
-  return NextResponse.json(milestones)
+  const { milestoneId } = await params
+  const milestone = await prisma.milestone.findUnique({ where: { id: milestoneId } })
+  if (!milestone) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  return NextResponse.json(milestone)
 }
 
-export async function POST(
+export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ grantId: string }> }
+  { params }: { params: Promise<{ milestoneId: string }> }
 ) {
   try {
-    const { grantId } = await params
+    const { milestoneId } = await params
     const body = await req.json()
-    const { builder, amount, title } = body
+    const { evidenceCid, submittedAt, status, reviewNotes, txHash } = body
 
-    if (!builder || !amount) {
-      return NextResponse.json(
-        { error: 'builder and amount required' },
-        { status: 400 }
-      )
-    }
-
-    const grant = await prisma.grant.findUnique({ where: { id: grantId } })
-    if (!grant) {
-      return NextResponse.json({ error: 'Grant not found' }, { status: 404 })
-    }
-
-    const milestoneId = keccak256(
-      encodePacked(
-        ['bytes32', 'address', 'uint256', 'uint256'],
-        [
-          grantId as `0x${string}`,
-          builder as `0x${string}`,
-          BigInt(amount),
-          BigInt(Date.now()),
-        ]
-      )
-    )
-
-    const milestone = await prisma.milestone.create({
+    const milestone = await prisma.milestone.update({
+      where: { id: milestoneId },
       data: {
-        id: milestoneId,
-        grantId,
-        builder,
-        amount: amount.toString(),
-        status: 1,
+        ...(evidenceCid !== undefined && { evidenceCid }),
+        ...(submittedAt !== undefined && { submittedAt: new Date(submittedAt) }),
+        ...(status !== undefined && { status }),
+        ...(reviewNotes !== undefined && { reviewNotes }),
+        ...(txHash !== undefined && { txHash }),
       },
     })
-
-    return NextResponse.json(milestone, { status: 201 })
+    return NextResponse.json(milestone)
   } catch (err) {
     return NextResponse.json(
       { error: err instanceof Error ? err.message : 'Internal error' },
